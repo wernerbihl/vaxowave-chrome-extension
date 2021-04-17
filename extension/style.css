@@ -1,0 +1,10 @@
+.cell div.prompt_container .toggle-button {
+  position:absolute;
+  left:10px;
+  background: #DDD;
+}
+
+.cell div.prompt_container .toggle-button svg {
+  padding:0 5px 0px 5px;
+  cursor:pointer;
+}

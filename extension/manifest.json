@@ -1,29 +1,43 @@
 {
-  "name": "Vaxowave Helpers",
-  "description": "Vaxowave Utilities to make working with ETLs faster",
+  "name": "Vaxowave",
   "version": "0.1",
-  "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  },
+  "description": "Vaxowave extension to help with Jupyter Notebooks",
   "permissions": [
-    "storage",
+    "*://*/*.ipynb",
     "activeTab",
-    "scripting"
+    "declarativeContent",
+    "storage",
+    "debugger",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
   ],
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "/images/16.png",
-      "32": "/images/32.png",
-      "48": "/images/48.png",
-      "128": "/images/128.png"
-    }
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
   },
+  "browser_action": {
+    "default_icon": "images/128.png"
+  },
+  "web_accessible_resources": [
+    "style.css"
+  ],
+  "content_scripts": [
+    {
+      "css": [
+        "style.css"
+      ],
+      "matches": [
+        "*://*/*.ipynb"
+      ]
+    }
+  ],
   "icons": {
-    "16": "/images/16.png",
-    "32": "/images/32.png",
-    "48": "/images/48.png",
-    "128": "/images/128.png"
-  }
+    "16": "images/16.png",
+    "32": "images/32.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "manifest_version": 2
 }

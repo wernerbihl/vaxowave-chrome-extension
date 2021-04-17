@@ -1,8 +1,13 @@
-let color = '#3aa757'
+var active = false
 
-chrome.runtime.onInstalled.addListener(() => {
-  console.log('INSTALLED')
+chrome.browserAction.onClicked.addListener(function (tab) {
+  chrome.tabs.executeScript({
+    file: 'script.js'
+  })
 
-  chrome.storage.sync.set({ color })
-  console.log('Default background color set to %cgreen', `color: ${color}`)
+  active = active ? false : true
+})
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  sendResponse({state: active})
 })
