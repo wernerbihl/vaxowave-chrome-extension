@@ -4,7 +4,6 @@ var app = {
   init: () => {
     console.log('Started Vaxowave Extension')
 
-    // Jupyter Notbook code collapse/expand
     app.jupyterCollapse()
     app.applyTheme()
     app.keyboardBookmarks()
@@ -58,9 +57,7 @@ var app = {
 
     hotkeys('alt+1, alt+2, alt+3, alt+4, alt+5, alt+6, alt+7, alt+8, alt+9, alt+0', (event, handler) => {
       const bookMarkNum = handler.key.replace('alt+', '')
-
       const windowLocation = app.bookmarkLocations[bookMarkNum]
-      console.log('SCROLLING TO: ' + windowLocation)
 
       document.getElementById('site').scrollTop = windowLocation
     })
@@ -68,10 +65,6 @@ var app = {
 
 }
 
-chrome.runtime.sendMessage({}, (response) => {
-  if (response.state) {
-    app.init()
-  } else {
-    app.stop()
-  }
+window.addEventListener('load', function () {
+  app.init()
 })
