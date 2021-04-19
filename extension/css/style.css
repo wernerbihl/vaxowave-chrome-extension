@@ -1,0 +1,38 @@
+/*
+* Cell Styles
+*/
+
+.cell div.prompt_container .toggle-button {
+  position:absolute;
+  left:10px;
+  background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjRweCIgZmlsbD0iIzAwMDAwMCI+PHBhdGggZD0iTTAgMGgyNHYyNEgwVjB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE5IDEzSDV2LTJoMTR2MnoiLz48L3N2Zz4=") #DDD;
+  background-size: 24px 24px;
+  width:24px;
+  height:24px;
+}
+
+.cell div.prompt_container .toggle-button.active {
+  background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjRweCIgZmlsbD0iIzAwMDAwMCI+PHBhdGggZD0iTTAgMGgyNHYyNEgwVjB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE5IDEzaC02djZoLTJ2LTZINXYtMmg2VjVoMnY2aDZ2MnoiLz48L3N2Zz4=") #DDD;
+}
+
+.cell .collapsed-cell {
+  height: 27px;
+  overflow: hidden;
+}
+
+/*
+* Notebook Styles
+*/
+
+div#notebook_panel, div#notebook {
+  background:#272822;
+}
+
+#notebook-container {
+  background:#1E1F1C !important;
+  color:#CCC !important;
+}
+
+div.text_cell_render, div.input_prompt {
+  color:#CCC !important;
+}
