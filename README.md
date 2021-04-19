@@ -2,6 +2,8 @@
 
 Small chrome extension to add some interface improvements to Sagemaker Notebooks
 
+![intro](https://raw.githubusercontent.com/wernerbihl/vaxowave-chrome-extension/master/demo.gif)
+
 ## Features
 
 * Code Folding
