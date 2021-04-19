@@ -2,7 +2,7 @@ var active = false
 
 chrome.browserAction.onClicked.addListener(function (tab) {
   chrome.tabs.executeScript({
-    file: 'script.js'
+    file: 'js/script.js'
   })
 
   active = active ? false : true

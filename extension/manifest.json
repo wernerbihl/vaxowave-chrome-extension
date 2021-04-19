@@ -27,7 +27,12 @@
     {
       "css": [
         "css/style.css",
-        "css/codemirror-monokai.css"
+        "css/codemirror-monokai.css",
+        "vendor/growl/dark-theme.min.css"
+      ],
+      "js": [
+        "vendor/hotkeys/hotkeys.min.js",
+        "vendor/growl/growl-notification.min.js"
       ],
       "matches": [
         "*://*/*.ipynb"

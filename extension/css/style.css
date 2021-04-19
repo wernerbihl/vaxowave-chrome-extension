@@ -24,6 +24,10 @@
 * Notebook Styles
 */
 
+#site {
+  scroll-behavior: smooth;
+}
+
 div#notebook_panel, div#notebook {
   background:#272822;
 }
