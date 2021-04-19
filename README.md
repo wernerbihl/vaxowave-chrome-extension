@@ -21,4 +21,5 @@ Small chrome extension to add some interface improvements to Sagemaker Notebooks
 Fold code by clicking the "-" and "+" icons next to code blocks
 
 Bind bookmarks by pressing "Ctrl+0" to "Ctrl+9"
+
 Navigate to bookmarks by pressing "Alt+0" to "Alt+9"
