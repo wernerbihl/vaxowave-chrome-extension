@@ -30,7 +30,8 @@
         "js/script.js"
       ],
       "matches": [
-        "*://*/*.ipynb"
+        "*://*/*.ipynb",
+        "*://*/*.ipynb?*"
       ],
       "run_at": "document_idle"
     }
