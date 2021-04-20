@@ -5,15 +5,16 @@ var app = {
   init: () => {
     console.log('Started Vaxowave Extension')
 
-    app.monitorDomChanges()
+    app.monitorCodeDomChanges()
+    app.monitorCodeRunDomChanges()
+
     app.jupyterCollapse(document)
     app.applyTheme(document)
     app.keyboardBookmarks()
   },
 
-  // Needed to detect when a new code block is inserted
-  monitorDomChanges: () => {
-
+  // Need to detect when a new code block is inserted so that we can apply theme and collapse options
+  monitorCodeDomChanges: () => {
     const targetNode = document.getElementById('notebook-container')
     const observerOptions = {
       childList: true,
@@ -23,17 +24,36 @@ var app = {
 
     const observer = new MutationObserver((mutationList, observer) => {
       mutationList.forEach((mutation) => {
-        var inputNode = mutation.addedNodes[0].childNodes[0]
-        console.log(inputNode)
-
-        app.jupyterCollapse(inputNode)
-        app.applyTheme(inputNode)
-
+        var inputNode = mutation.addedNodes.length > 0 && mutation.addedNodes[0].childNodes.length > 0 ? mutation.addedNodes[0].childNodes[0] : null
+        if (inputNode) {
+          app.jupyterCollapse(inputNode)
+          app.applyTheme(inputNode)
+        }
       })
     })
 
     observer.observe(targetNode, observerOptions)
+  },
 
+  // Need to detect when a code block is run so that we can re-apply the collapse buttons after the DOM changed
+  monitorCodeRunDomChanges: () => {
+    const targetNode = document.getElementById('notebook-container')
+    const observerOptions = {
+      childList: true,
+      attributes: false,
+      subtree: true
+    }
+
+    const observer = new MutationObserver((mutationList, observer) => {
+      mutationList.forEach((mutation) => {
+        if (mutation.type === 'childList' && mutation.removedNodes.length > 0 && mutation.removedNodes[0].className === 'toggle-button') { // Toggle button removed
+          const inputNode = mutation.target.parentNode
+          app.jupyterCollapse(inputNode)
+        }
+      })
+    })
+
+    observer.observe(targetNode, observerOptions)
   },
 
   // Adds collapes/expand buttons to code blocks
@@ -60,7 +80,6 @@ var app = {
 
   // Maps keyboard shortcuts for bookmarks
   keyboardBookmarks: () => {
-
     // Set bookmark locations to top of screen by default
     for (i = 0; i <= 9; i++) {
       app.bookmarkLocations[i] = 0
@@ -78,7 +97,6 @@ var app = {
         closeTimeout: 2500,
         showProgress: true
       })
-
     })
 
     hotkeys('alt+1, alt+2, alt+3, alt+4, alt+5, alt+6, alt+7, alt+8, alt+9, alt+0', (event, handler) => {
@@ -88,10 +106,8 @@ var app = {
       document.getElementById('site').scrollTop = windowLocation
     })
   }
-
 }
 
-window.addEventListener('load', function () {
+window.addEventListener('load', () => {
   app.init()
 })
-
