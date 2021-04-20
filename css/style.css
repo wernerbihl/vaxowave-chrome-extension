@@ -40,3 +40,16 @@ div#notebook_panel, div#notebook {
 div.text_cell_render, div.input_prompt {
   color:#CCC !important;
 }
+
+.output_area {
+  background: #292A2D;
+  color:#FFF;
+}
+
+.output div.output_text, .output div.output_area pre {
+  color:#A5A5A5;
+}
+
+.output div.output_subarea {
+  padding: 0.8em 0.4em;
+}

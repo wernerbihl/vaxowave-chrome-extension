@@ -1,21 +1,44 @@
 var app = {
+  initialized: false,
   bookmarkLocations: [],
 
   init: () => {
     console.log('Started Vaxowave Extension')
 
-    app.jupyterCollapse()
-    app.applyTheme()
+    app.monitorDomChanges()
+    app.jupyterCollapse(document)
+    app.applyTheme(document)
     app.keyboardBookmarks()
   },
 
-  stop: () => {
-    console.log('Stopped Vaxowave Extension')
+  // Needed to detect when a new code block is inserted
+  monitorDomChanges: () => {
+
+    const targetNode = document.getElementById('notebook-container')
+    const observerOptions = {
+      childList: true,
+      attributes: false,
+      subtree: false
+    }
+
+    const observer = new MutationObserver((mutationList, observer) => {
+      mutationList.forEach((mutation) => {
+        var inputNode = mutation.addedNodes[0].childNodes[0]
+        console.log(inputNode)
+
+        app.jupyterCollapse(inputNode)
+        app.applyTheme(inputNode)
+
+      })
+    })
+
+    observer.observe(targetNode, observerOptions)
+
   },
 
-  jupyterCollapse: () => {
-
-    document.querySelectorAll('.prompt.input_prompt bdi').forEach(element => {
+  // Adds collapes/expand buttons to code blocks
+  jupyterCollapse: (domElement) => {
+    domElement.querySelectorAll('.prompt.input_prompt bdi').forEach(element => {
       var collapseButton = document.createElement('span')
       collapseButton.classList.add('toggle-button')
 
@@ -28,13 +51,16 @@ var app = {
     })
   },
 
-  applyTheme: () => {
-    document.querySelectorAll('.CodeMirror').forEach(element => {
+  // Applies a theme to the codemirror code blocks
+  applyTheme: (domElement) => {
+    domElement.querySelectorAll('.CodeMirror').forEach(element => {
       element.classList.add('cm-s-monokai')
     })
   },
 
+  // Maps keyboard shortcuts for bookmarks
   keyboardBookmarks: () => {
+
     // Set bookmark locations to top of screen by default
     for (i = 0; i <= 9; i++) {
       app.bookmarkLocations[i] = 0
@@ -68,3 +94,4 @@ var app = {
 window.addEventListener('load', function () {
   app.init()
 })
+
