@@ -37,10 +37,27 @@ div#notebook_panel, div#notebook {
   color:#CCC !important;
 }
 
-div.text_cell_render, div.input_prompt {
+div.text_cell_render,
+div.input_prompt,
+.rendered_html a,
+.rendered_html th,
+.rendered_html tr td,
+.rendered_html * + p {
   color:#CCC !important;
 }
 
+.rendered_html a:hover {
+  color:#296eaa !important;
+}
+
+.rendered_html .dataframe tbody tr th:only-of-type,
+.rendered_html tr td {
+  background: rgb(30, 31, 28) !important;
+}
+
+/*
+* Output Styles
+*/
 .output_area {
   background: #292A2D;
   color:#FFF;
@@ -53,3 +70,4 @@ div.text_cell_render, div.input_prompt {
 .output div.output_subarea {
   padding: 0.8em 0.4em;
 }
+
